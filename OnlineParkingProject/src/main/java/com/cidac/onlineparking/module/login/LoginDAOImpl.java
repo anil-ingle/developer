@@ -30,13 +30,9 @@ public class LoginDAOImpl {
 				rs = ps.executeQuery();
 				if (rs != null) {
 					while(rs.next()) {
-						System.out.println(rs.getString(3));
 						name=rs.getString(3);
-						int count = rs.getRow();
-						System.out.println(count);
-						if(count != 0) {
-							return name;
-						}
+						System.out.println(name);
+						return name;
 					}
 				}
 			}

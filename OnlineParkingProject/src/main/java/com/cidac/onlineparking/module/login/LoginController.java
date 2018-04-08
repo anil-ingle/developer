@@ -1,6 +1,7 @@
 package com.cidac.onlineparking.module.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -24,40 +25,31 @@ public class LoginController extends HttpServlet {
 		String userName = null;
 		String password = null;
 		RequestDispatcher rd = null;
-		System.out.println("in controller");
+		PrintWriter pw = resp.getWriter();
 		// get the form data
 		userName = req.getParameter("email");
 		password = req.getParameter("password");
-		System.out.println(userName+"    "+password);
 		try {
 			if (userName != null && password != null) {
 				// call the service
 				service = new LoginServiceImpl();
 				result = service.loginService(userName, password);
 				if (result == null) {
-					rd = req.getRequestDispatcher("login/login.jsp");
-					rd.forward(req, resp);
 					msg = "Login Failure try once again";
 					// store the message in request scope
 					req.setAttribute("msg", msg);
-				} else {
-					System.out.println("login success");
-					/*rd = req.getRequestDispatcher("login/success.jsp");
-					rd.forward(req, resp);*/
-					resp.sendRedirect("login/success.jsp");
 
+					rd = req.getRequestDispatcher("login/login.jsp");
+					rd.forward(req, resp);
+				} else {
+					resp.sendRedirect("login/success.jsp");
 				}
+			} else {
+				rd = req.getRequestDispatcher("login/login.jsp");
+				rd.forward(req, resp);
 			}
-			else {
-				rd=req.getRequestDispatcher("login/login.jsp");
-				rd.forward(req,resp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			pw.println("Internal problem ! try once again");
 		}
 	}
 
