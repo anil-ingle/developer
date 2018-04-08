@@ -37,6 +37,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+<<<<<<< HEAD
 			<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 			<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
@@ -45,6 +46,8 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+=======
+>>>>>>> b266866a6b4cd1419d26d5d5cbc72403b6fed009
 	</dependencies>
 	<build>
 		<finalName>OnlineParkingProject</finalName>

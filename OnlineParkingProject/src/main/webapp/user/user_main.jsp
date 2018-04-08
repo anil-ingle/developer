@@ -9,10 +9,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		             alert("hi");
-						$.get("../user", function(data) {
-							alert(data);
-							var a = "<option value=''></option>";
+		console.log("first");
+						$.get("../user?cid="+ "cityLink", function(data) {
+							var a = "<option value=''> </option>";
 							$.each(JSON.parse(data), function(k, v) {
 								a += "<option value='"+v.cityId+"'>"
 										+ v.cityName + "</option>";
@@ -21,12 +20,28 @@
 
 						});
 	});
-						</script>
+	$("#city").change(function() {
+		alert("second");
+		var cityId = $(this).val();
+		console.log("cityId "+cityId);
+		$.get("../user?cid="+ cityId+"&link2="+"cityAreaLink",function(data) {
+		//alert(data);
+		var a = "<option value=' '>Select Area</option>";
+		$.each(JSON.parse(data),function(k,v) {
+		a += "<option value='"+v.areaId+"'>"+ v.areaName+ "</option>";
+		});
+		$("#area").html(a);
+					});
+
+				});
+	</script>
 
 <body>
 <div>
 <h2></h2>
-Select city: <select name="city" id="city" ></select>
+Select city: <select name="city" id="city" ></select><br>
+Select area: <select name="area" id="area" ></select>
+
 							 
 
 </div>
