@@ -1,15 +1,17 @@
 @charset "UTF-8";
 
 .main-container {
-	width: 500px;
-	height: 500px;
+	width: 450px;
+	height: 458px;
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
-	background-color: #AFEEEE;
+	background-color: 	#BDB76B;
 	align-items: center;
-	opacity: 0.6;
+	opacity: 0.5;
 	border-radius: 12px;
+	position: absolute;
+    bottom: 100px;
 }
 
 ::placeholder {
@@ -26,16 +28,25 @@ form {
 }
 
 input[type="text"], input[type="password"] {
+	width: 84%;
+	height: 40px;
+	margin: 0px 0px 20px 0px;
+	font-size:17px;
+}
+.input-user{
+	display: flex;
+	flex-direction: column;
 	width: 100%;
-	height: 50px;
-	margin: 20px 0px 20px 0px;
+	align-items: center;
 }
 
 input[type="submit"] {
-	width: 150px;
+	width: 220px;
 	height: 50px;
 	background-color: purple;
 	border-radius: 15px;
+	font-size: 22px;
+	color: white;
 }
 
 .bottom-login {
@@ -45,7 +56,9 @@ input[type="submit"] {
 	display: flex;
 	justify-content: space-evenly;
 }
-
+.user-logo{
+padding: 30px 0px 0px 0px;	
+}
 input[type="submit"] {
 	width: 150px;
 	height: 50px;
@@ -56,7 +69,7 @@ input[type="submit"] {
 .bottom-login {
 	width: 100%;
 	height: 100px;
-	padding: 30px 0px 30px 0px;
+	padding: 25px 0px 0px 0px;
 	display: flex;
 	justify-content: space-evenly;
 }

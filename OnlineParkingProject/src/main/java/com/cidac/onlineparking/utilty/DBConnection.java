@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 public class DBConnection {
 	// get Connection obj from jdbc con pool
 	public static Connection getConnection() throws SQLException, NamingException {
+		System.out.println("in BDConnection");
 		Connection con = null;
 		InitialContext ic = null;
 		DataSource ds = null;
@@ -21,6 +22,7 @@ public class DBConnection {
 		ds = (DataSource) ic.lookup("java:/comp/env/DsJndi");
 		// get Connection obj from jdbc con pool
 		con = ds.getConnection();
+		System.out.println("get the connection successfully in DBConection");
 		}
 		return con;
 	}// getConnection()

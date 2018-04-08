@@ -12,7 +12,7 @@ import com.cidac.onlineparking.utilty.UserQuery;
 
 public class UserDAOImpl implements UserDAO {
 
-	@Override
+
 	public List<CityVO> selectCity() {
 		List<CityVO> cityVOs=new ArrayList();
 
