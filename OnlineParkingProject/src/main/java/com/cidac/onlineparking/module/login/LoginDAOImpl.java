@@ -31,7 +31,6 @@ public class LoginDAOImpl {
 				if (rs != null) {
 					while(rs.next()) {
 						name=rs.getString(3);
-						System.out.println(name);
 						return name;
 					}
 				}
