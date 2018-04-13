@@ -37,7 +37,7 @@ public class UserDAO{
 	}
 	
 	public List<CityAreaVO> getArea(Integer cityId){
-		List<CityAreaVO> areaVOs=new ArrayList<>();
+		List<CityAreaVO> areaVOs=new ArrayList();
 		try {
 			Connection con=DBConnection.getConnection();
 			PreparedStatement psmt=con.prepareStatement(UserQuery.SLECT_CITY_AREA);

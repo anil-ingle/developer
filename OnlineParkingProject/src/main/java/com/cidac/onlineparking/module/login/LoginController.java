@@ -42,9 +42,13 @@ public class LoginController extends HttpServlet {
 					rd = req.getRequestDispatcher("login/login.jsp");
 					rd.forward(req, resp);
 				} else {
-					resp.sendRedirect("login/success.jsp");
+					req.setAttribute("userName", result);
+					rd = req.getRequestDispatcher("login/success.jsp");
+					rd.forward(req, resp);
 				}
 			} else {
+				msg = "Login Failure try once again";
+				req.setAttribute("msg", msg);
 				rd = req.getRequestDispatcher("login/login.jsp");
 				rd.forward(req, resp);
 			}

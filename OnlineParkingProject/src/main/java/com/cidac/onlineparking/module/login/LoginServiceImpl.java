@@ -10,7 +10,6 @@ public class LoginServiceImpl {
 		//get the LoginDaoImpl Object
 		dao=new LoginDAOImpl();
 		//call the dao methintod
-		System.out.println("in serveice");
 		return dao.checkLogin(email, password);
 	}
 
