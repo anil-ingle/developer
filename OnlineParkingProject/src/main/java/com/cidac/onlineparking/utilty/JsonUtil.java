@@ -14,14 +14,24 @@ public class JsonUtil {
 
 	}
 
-	public static String convertJavaToJson(Object obj) throws JsonProcessingException {
+	public static String convertJavaToJson(Object obj){
 		String jsonStr = "{}";
 		try {
 			jsonStr = mapper.writeValueAsString(obj);
 		} catch (JsonProcessingException jpe) {
-			throw jpe;
+			try {
+				throw jpe;
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
-			throw e;
+			try {
+				throw e;
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return jsonStr;
 	}// end of method
@@ -38,7 +48,12 @@ public class JsonUtil {
 		} catch (IOException ioe) {
 			throw ioe;
 		} catch (Exception e) {
-			throw e;
+			try {
+				throw e;
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return response;
 	}// end of method
