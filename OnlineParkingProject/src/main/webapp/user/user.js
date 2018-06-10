@@ -110,7 +110,8 @@
 		
 	}
 		
-		function bookNow() {
+		
+	function bookNow() {
 		let errorMsg=false;
 		  var record={};
 		  if(slotIds==''){

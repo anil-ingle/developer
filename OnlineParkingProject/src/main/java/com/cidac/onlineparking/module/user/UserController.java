@@ -32,6 +32,7 @@ public class UserController extends HttpServlet {
 		// }
 	}
 
+	
 	private void getArea(String parameter, HttpServletResponse resp) throws NumberFormatException, IOException {
 		String areaName = JsonUtil.convertJavaToJson(new UserService().getArea(Integer.parseInt(parameter)));
 		resp.setContentType("Application/Json");

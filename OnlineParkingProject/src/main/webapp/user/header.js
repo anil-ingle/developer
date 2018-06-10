@@ -20,7 +20,6 @@
 		logo(name);
 		
 		
-
 		});
 	/*window.onload = function what(){
 		logo("anil");
