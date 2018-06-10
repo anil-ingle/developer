@@ -25,7 +25,7 @@
 		logo("anil");
 		};*/
 	
-	window.onload =function logo(name){
+	function logo(name){
 		let ur="<div class='user-r-page'><a class='hy-user' href='user_main.jsp'>Home</a></div>"
 		let uh="<div class='user-r-history'><a class='hy-history' href='order.html'>Order</a></div>"
 		let p="<div class='wolet-page'><a class='hy-wpage' href='../input.html'>My Wolet</a></div>"

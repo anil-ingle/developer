@@ -60,4 +60,30 @@ public class UserDAO{
 		
 	}
 
+	public List<UserBookSlotVO> getAreaSlot(Integer areaId){
+		List<UserBookSlotVO> bookSlotVOs=new ArrayList();
+		try {
+			Connection con=DBConnection.getConnection();
+			PreparedStatement psmt=con.prepareStatement(UserQuery.SELECT_AREASLOT);
+			//set input param 
+			psmt.setInt(1, areaId);
+			//execute the query
+			ResultSet rs=psmt.executeQuery();
+			while(rs.next()) {
+				UserBookSlotVO vo=new UserBookSlotVO();
+				vo.setfSlotId(rs.getInt("id"));
+				vo.setSlotNumber(rs.getInt("slot_number"));
+				vo.setIsReserved(rs.getInt("is_reserved"));
+				vo.setfSlotId(rs.getInt("fslot_id"));
+				bookSlotVOs.add(vo);
+				
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return bookSlotVOs;
+		
+	}
 }

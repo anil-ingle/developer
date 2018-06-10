@@ -19,7 +19,7 @@
 						});
 						jq("#city").change(function() {
 						var cityId = $(this).val();
-						jq.get("../user?cid="+ cityId+"&link2="+"cityAreaLink",function(data) {
+						jq.get("../user?cityId="+ cityId+"&link2="+"cityAreaLink",function(data) {
 						var a = "<option value=' '>Select area</option>";
 						jq.each(JSON.parse(data),function(k,v) {
 						a += "<option value='"+v.areaId+"'>"+ v.areaName+ "</option>";
@@ -57,7 +57,7 @@
 		if(val>=10)
 			minVal=val/2;
 		for(let count=0;count<val;count++){
-			if(data[count].isReserved){
+			if(data[count].isReserved==1){
 				c=c+"<button   onclick='myFunction1(this)' value="+data[count].slotNumber+" id="+data[count].slotNumber+"   class='search-button-reserved'>slot"+ data[count].slotNumber+"</button>";
 
 			}else{
