@@ -3,6 +3,7 @@ package com.cidac.onlineparking.module.user;
 import java.sql.Timestamp;
 
 public class RegisterVO {
+	private int id;
 	private String fName;
 	private String lName;
 	private String email;
@@ -12,6 +13,14 @@ public class RegisterVO {
 	private String gender;
 	private int cityId;
 	private String currentTime;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getfName() {
 		return fName;
@@ -87,9 +96,11 @@ public class RegisterVO {
 
 	@Override
 	public String toString() {
-		return "RegisterVO [fName=" + fName + ", lName=" + lName + ", email=" + email + ", pass=" + pass + ", dob="
-				+ dob + ", mobileNumber=" + mobileNumber + ", gender=" + gender + ", cityId=" + cityId
+		return "RegisterVO [id=" + id + ", fName=" + fName + ", lName=" + lName + ", email=" + email + ", pass=" + pass
+				+ ", dob=" + dob + ", mobileNumber=" + mobileNumber + ", gender=" + gender + ", cityId=" + cityId
 				+ ", currentTime=" + currentTime + "]";
 	}
 
+	
+	
 }

@@ -23,4 +23,8 @@ public class UserService{
 		}
 		
 	}
+	
+	public RegisterVO login(RegisterVO registerVO){
+		return dao.login(registerVO);
+	}
 }

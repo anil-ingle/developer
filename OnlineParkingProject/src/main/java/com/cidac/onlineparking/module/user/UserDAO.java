@@ -111,4 +111,36 @@ public class UserDAO{
 		return status;
 		
 	}
+	
+	public RegisterVO login(RegisterVO registerVO){
+		int status=0;
+		RegisterVO vo=new RegisterVO();
+		try {
+			Connection con=DBConnection.getConnection();
+			PreparedStatement psmt=con.prepareStatement(UserQuery.LOGIN_USSER);
+			//set input param 
+			psmt.setString(1, registerVO.getEmail());
+			psmt.setString(2, registerVO.getPass());
+			
+			//execute the query
+			ResultSet rs=psmt.executeQuery();
+			while(rs.next()) {
+				
+				vo.setId(rs.getInt("id"));
+				vo.setfName(rs.getString("fname"));
+				vo.setlName(rs.getString("lname"));
+				vo.setEmail(rs.getString("email"));
+				vo.setPass(rs.getString("password"));
+				vo.setGender(rs.getString("gender"));
+				vo.setMobileNumber(rs.getString("mobileNumber"));
+			
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+		
+	}
 }

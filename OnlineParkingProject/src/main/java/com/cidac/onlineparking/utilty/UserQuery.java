@@ -10,5 +10,7 @@ public class UserQuery {
 	public static final String SELECT_AREASLOT="select id,slot_number,is_reserved,fslot_id from onlineparking.tab_slot_datail where fslot_id=(select slot_id from tab_slot where fcity_id=?)";
 	
 	public static final String REGISTER_USER="insert into user_info (fname,lname,email,mobileNumber,createdDate,dob,cityId,password,gender) values(?,?,?,?,?,?,?,?,?)";
+	
+	public static final String LOGIN_USSER="select id,fname,lname,email,mobileNumber,password,gender from user_info where email=? and password=?";
 
 }

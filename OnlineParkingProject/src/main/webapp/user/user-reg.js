@@ -16,6 +16,17 @@ var jq=$;
 	document.getElementsByTagName('head')[0].appendChild(st);
 	
 	
+					jq(document).ready(function() {
+						jq.get("../user?cid="+ "cityLink", function(data) {
+							var a = "<option value=' '>Select city</option>";
+							jq.each(JSON.parse(data), function(k, v) {
+								a += "<option value='"+v.cityId+"'>"
+										+ v.cityName + "</option>";
+							});
+							jq("#city").html(a);
+
+						});
+					});
 					/*
 					 * 
 					 * console.log("fName  "+fName);
@@ -31,13 +42,47 @@ var jq=$;
 					 */
 					
 					
-			function userLogin() {
+			function formSubmit() {
 				let error=false;
 				let form={};
+				let fName=document.getElementById("fname").value;
+				let lName=document.getElementById("lname").value;
+				let email=document.getElementById("reg-email").value;
+				let pass=document.getElementById("reg-pass").value;
+				let mobileNumber=document.getElementById("reg-mob").value;
+				let dob=document.getElementById("dob").value;
+				let male=document.getElementById("male").checked;
+				let gender='';
+				let fmale=document.getElementById("fmale").checked;
+				let cityId=document.getElementById("city").value;
 				
-				let email=document.getElementById("email").value;
-				let pass=document.getElementById("pass").value;
+				if(male==true && fmale==false || fmale==true && male==false){
+					if(male){
+						gender="male";
+						form.gender=gender;
+					}else{
+						gender="female";
+						form.gender=gender;
+					}
 					
+				}else{
+					error=true;
+					
+				}
+				if(!fName=='' || fName.length>0){
+					form.fName=fName;
+					
+				}else{
+					error=true;
+					
+				}	
+				if(!lName=='' || lName.length>0){
+					form.lName=lName;
+					
+				}else{
+					error=true;
+					
+				}	
 				if(!email=='' || email.length>0){
 					form.email=email;
 					
@@ -52,7 +97,27 @@ var jq=$;
 					error=true;
 					
 				}	
-				
+				if(!mobileNumber=='' || mobileNumber.length>0){
+					form.mobileNumber=mobileNumber;
+					
+				}else{
+					error=true;
+					
+				}
+				if(!dob=='' || dob.length>0){
+					form.dob=dob;
+					
+				}else{
+					error=true;
+					
+				}	
+				if(!cityId=='' || cityId.length>0){
+					form.cityId=cityId;
+					
+				}else{
+					error=true;
+					
+				}	
 				
 				
 				if(error){
@@ -64,27 +129,24 @@ var jq=$;
 					console.log(currentTime)
 					
 					jq.ajax({
-			            url:  "../user?link="+ 'login',
+			            url:  "../user?link="+ 'reg',
 			            type: "POST",
 			            dataType: "json",
 			            contentType: 'application/json; charset=utf-8',
 			            data: JSON.stringify(form),
 			            success: function (response) {
 			                if (response) {
-			                	/*jq("#y").load("user-main.html");*/
-			                	sessionStorage.setItem('name', response.fName);
-
-			                	window.location.href = "http://localhost:2020/OnlineParkingProject/user/user-main.html";
-			                	toastr.success("login successfully.");
+			                	
+			                	toastr.success("Registration successfully.");
 			                	resetReg();
 			                	 
 			                }else{
-			                	toastr.error("Username or Password incorrect.");
+			                	toastr.error("Record not insertrd Please contact support team.");
 			                	resetReg();
 			                }
 			            },
 			            error: function (xhr, status, err) {
-			            	toastr.error("Login not successfully. Please contact support team.");
+			            	toastr.error("Record not insertrd Please contact support team.");
 			            	resetReg();
 			            	  console.log("fail...")
 			            	  

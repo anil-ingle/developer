@@ -18,10 +18,11 @@ select{
 </head>
 <script src="jquery.min.js"></script>
 <script type="text/javascript" src="user-login.js"></script>
+<script type="text/javascript" src="user-reg.js"></script>
 
 
 
-<body>
+<body id="y">
 	<div class="main-container">
 		<div class="main-header">
 			<div class="header-menu">
@@ -34,7 +35,7 @@ select{
 					</h1>
 				</div>
 				<div class="parking-login">
-					<form action="">
+					<div>
 						<table cellspacing="0" role="presentation">
 							<tr>
 								<td class="html7magic"><label for="email">Email or
@@ -49,7 +50,7 @@ select{
 								<td><label class="uiButton uiButtonConfirm"
 									id="loginbutton" for="u_0_2"><input value="Log In"
 										aria-label="Log In" tabindex="4"
-										data-testid="royal_login_button" type="submit" id="u_0_2" /></label></td>
+										data-testid="royal_login_button" onclick="userLogin()" type="button" id="u_0_2" /></label></td>
 							</tr>
 							<tr>
 								<td class="login_form_label_field"></td>
@@ -61,7 +62,7 @@ select{
 							</tr>
 						</table>
 
-					</form>
+					</div>
 
 				</div>
 			</div>
