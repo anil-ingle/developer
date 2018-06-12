@@ -86,4 +86,29 @@ public class UserDAO{
 		return bookSlotVOs;
 		
 	}
+	public int registerUser(RegisterVO vo){
+		int status=0;
+		try {
+			Connection con=DBConnection.getConnection();
+			PreparedStatement psmt=con.prepareStatement(UserQuery.REGISTER_USER);
+			//set input param 
+			psmt.setString(1, vo.getfName());
+			psmt.setString(2, vo.getlName());
+			psmt.setString(3, vo.getEmail());
+			psmt.setString(4, vo.getMobileNumber());
+			psmt.setString(5, vo.getCurrentTime());
+			psmt.setString(6, vo.getDob());
+			psmt.setInt(7, vo.getCityId());
+			psmt.setString(8, vo.getPass());
+			psmt.setString(9, vo.getGender());
+			//execute the query
+			 status=psmt.executeUpdate();
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+		
+	}
 }

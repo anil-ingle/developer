@@ -14,4 +14,13 @@ public class UserService{
 	public List<UserBookSlotVO> getAreaSlot(Integer areaId){
 		return dao.getAreaSlot(areaId);
 	}
+	public boolean registerUser(RegisterVO vo){
+		int status=dao.registerUser(vo);
+		if(status==0) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
 }

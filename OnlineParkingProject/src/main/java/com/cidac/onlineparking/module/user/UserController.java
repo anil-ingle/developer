@@ -54,9 +54,40 @@ public class UserController extends HttpServlet {
 			
 			this.bookSlot(req.getParameter("areaId"), resp);
 		}
+		if ((link != null) && link.equals("reg")) {
+			boolean flag=true;
+			StringBuilder buffer = new StringBuilder();
+			 BufferedReader reader = req.getReader();
+			 String line;
+		        while ((line = reader.readLine()) != null) {
+		            buffer.append(line);
+		        }
+
+		        String requestData = buffer.toString();
+		        System.out.println("data-"+requestData);
+		        
+			
+			/*RegisterVO vo =JsonUtil.convertJsonToJava(requestData, RegisterVO.class);*/
+			this.registeUser(JsonUtil.convertJsonToJava(requestData, RegisterVO.class), resp);
+			 
+		}
+		
 	}
 
 	
+	private void registeUser(RegisterVO vo, HttpServletResponse resp) {
+		
+		resp.setContentType("Application/Json");
+		try {
+			boolean val=service.registerUser(vo);
+			resp.getWriter().write(val+"");
+		} catch (IOException e) {
+			
+		e.printStackTrace();
+		}
+		
+		
+	}
 	private void bookSlot(String parameter, HttpServletResponse resp) {
 		String val="true";
 		resp.setContentType("Application/Json");
