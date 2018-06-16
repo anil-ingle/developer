@@ -12,5 +12,7 @@ public class UserQuery {
 	public static final String REGISTER_USER="insert into user_info (fname,lname,email,mobileNumber,createdDate,dob,cityId,password,gender) values(?,?,?,?,?,?,?,?,?)";
 	
 	public static final String LOGIN_USSER="select id,fname,lname,email,mobileNumber,password,gender from user_info where email=? and password=?";
+	
+	public static final String CREATE_USER_WOLET="insert into userwolet (totalAmount,userId) values(?,?)";
 
 }

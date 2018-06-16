@@ -8,8 +8,10 @@ display:flex;
 .main-header {
 	width: 100%;
 	height: 82px;
-	background-color: #3b5998;
-	background-image: linear-gradient(#4e69a2, #3b5998 50%);
+	/* background-color: #3b5998;
+	background-image: linear-gradient(#4e69a2, #3b5998 50%); */
+	background: linear-gradient(154deg,#008fe2,#00b29c);
+    background-color: transparent !important;
 	border-bottom: 1px solid #133783;
 	min-height: 42px;
 	position: relative;

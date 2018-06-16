@@ -1,10 +1,10 @@
 	
 	var jq=$;
 	
-	var script = document.createElement('script');
+	/*var script = document.createElement('script');
 	script.src = 'jquery.min.js';
 	script.type = 'text/javascript';
-	document.getElementsByTagName('head')[0].appendChild(script);
+	document.getElementsByTagName('head')[0].appendChild(script);*/
 	
 	
 					jq(document).ready(function() {

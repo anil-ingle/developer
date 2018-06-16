@@ -1,9 +1,9 @@
 var jq=$;
 	
-	var script = document.createElement('script');
+	/*var script = document.createElement('script');
 	script.src = 'jquery.min.js';
 	script.type = 'text/javascript';
-	document.getElementsByTagName('head')[0].appendChild(script);
+	document.getElementsByTagName('head')[0].appendChild(script);*/
 	///home/anil/Desktop/developer/OnlineParkingProject/src/main/webapp/user/node_modules/toastr/build
 	var sc = document.createElement('script');
 	sc.src = 'node_modules/toastr/build/toastr.min.js';
