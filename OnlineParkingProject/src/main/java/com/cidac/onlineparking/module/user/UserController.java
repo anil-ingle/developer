@@ -37,15 +37,13 @@ public class UserController extends HttpServlet {
 			this.getAreaSlot(req.getParameter("areaId"), req, resp);
 		}
 		String link = req.getParameter("link");
-		System.out.println("link--"+link);
+		System.out.println("link--" + link);
 		if ((link != null) && link.equals("logout")) {
 			System.out.println("in m1");
-			this.logOut(req,resp);
+			this.logOut(req, resp);
 		}
 
 	}
-
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,7 +57,7 @@ public class UserController extends HttpServlet {
 			}
 
 			String requestData = buffer.toString();
-			this.bookSlot(req.getParameter("areaId"), req, resp);
+			this.bookSlot(buffer.toString(), req, resp);
 		}
 		if ((link != null) && link.equals("reg")) {
 			StringBuilder buffer = new StringBuilder();
@@ -70,6 +68,19 @@ public class UserController extends HttpServlet {
 			}
 
 			this.registeUser(JsonUtil.convertJsonToJava(buffer.toString(), RegisterVO.class), resp);
+
+		}
+		if ((link != null) && link.equals("wolletlink")) {
+			StringBuilder buffer = new StringBuilder();
+			BufferedReader reader = req.getReader();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				buffer.append(line);
+			}
+			System.out.println("wollet info  " + buffer.toString());
+			WolletBookVO bookVO = JsonUtil.convertJsonToJava(buffer.toString(), WolletBookVO.class);
+			System.out.println("bookvo  " + bookVO);
+			this.slotBookUsingWolet(bookVO, req, resp);
 
 		}
 		if ((link != null) && link.equals("login")) {
@@ -90,6 +101,7 @@ public class UserController extends HttpServlet {
 	// ------user defined private method to services-------------------------------
 	private void login(RegisterVO registerVO, HttpServletResponse resp, HttpServletRequest req) {
 		RegisterVO vo = service.login(registerVO);
+		System.out.println("reg vo " + vo);
 		HttpSession session = req.getSession(true);
 		if (vo.getId() != 0) {
 			resp.setContentType("Application/Json");
@@ -174,11 +186,11 @@ public class UserController extends HttpServlet {
 		resp.getWriter().write(city);
 
 	}
+
 	private void logOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if(session!=null) {
+		if (session != null) {
 			System.out.println("in m2");
-			
 
 			session.invalidate();
 			String val = "true";
@@ -189,11 +201,29 @@ public class UserController extends HttpServlet {
 
 				e.printStackTrace();
 			}
-		}else {
+		} else {
 			req.getRequestDispatcher("").forward(req, resp);
 		}
-		
-		
+
+	}
+
+	private void slotBookUsingWolet(WolletBookVO bookVO, HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+		if (session != null) {
+			boolean status = service.slotBookUsingWolet(bookVO);
+			System.out.println("status "+status);
+			resp.setContentType("Application/Json");
+			try {
+				resp.getWriter().write(status + "");
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+			req.getRequestDispatcher("").forward(req, resp);
+		}
+
 	}
 
 }

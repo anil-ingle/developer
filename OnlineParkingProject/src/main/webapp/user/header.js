@@ -16,8 +16,15 @@
 	// Store
 	
 	jq(document).ready(function() {
+		 let _user = JSON.parse(sessionStorage.getItem('user'));
+		 if(_user.fName){
+			 let name=_user.fName;
+			 logo(name);
+		 }else{
+			 logo('User');
+		 }
 		
-		logo(sessionStorage.getItem('name'));
+		
 		
 		
 		});

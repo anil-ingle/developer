@@ -71,8 +71,9 @@ var jq=$;
 			            data: JSON.stringify(form),
 			            success: function (response) {
 			                if (response) {
-			                	/*jq("#y").load("user-main.html");*/
-			                	sessionStorage.setItem('name', response.fName);
+			                	console.log(response)
+			                	
+			                	 sessionStorage.setItem('user', JSON.stringify(response));
 
 			                	window.location.href = "http://localhost:2020/OnlineParkingProject/user/user-main.html";
 			                	toastr.success("login successfully.");

@@ -68,10 +68,13 @@
 
  	<script type="text/javascript" src="user.js"></script>
  	<script type="text/javascript" src="header.js"></script>
+ 	<script src="node_modules/toastr/build/toastr.min.js"></script>
+<link rel="stylesheet"
+	href="node_modules/toastr/build/toastr.min.css">
 	
 	
-  <link rel="stylesheet" href="bootstrap.min.css">
-   <script type="text/javascript" src="bootstrap.min.js"></script>
+  <link rel="stylesheet" href="node_modules/bt/bootstrap.min.css">
+   <script type="text/javascript" src="node_modules/bt/bootstrap.min.js"></script>
 	<body>
  <div class="main-container">
 			 <div id="hdr" class="header"><!-- vw<input type="button" value="myWolet" onclick="window.location = 'path-here';"> --> </div>
@@ -83,19 +86,19 @@
         <div class="select-city-area">
            <div id="cityDiv">
 				<lebel id="lebel">Select city:</lebel> 
-				<select class="selectSize" name="city" id="city">
+				<select  class="selectSize" name="city" id="city">
 				  <option  value=''>Select City</option>
 				</select><br>
 			</div>
 		<div>
 			<label id="lebel">Select area:</label> 
-			<select class="selectSize" name="area"id="area" >
+			<select  class="selectSize" name="area"id="area" >
 			<option selected="selected" value="0">Select area</option></select>
 		</div>
 		
        <div id="inTime" >
          <lebel id="lebel"">Expected Outtime :</lebel>
-         <select onclick="timeFunction()" class="selectSize">
+         <select id="select-time" onclick="timeFunction()" class="selectSize">
 			<option selected="selected" value="0">Duration</option>
 			<option  value="0"2>02:00</option>
 			<option  value="03">03:00</option>

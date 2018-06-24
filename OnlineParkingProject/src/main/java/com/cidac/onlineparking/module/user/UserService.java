@@ -1,5 +1,6 @@
 package com.cidac.onlineparking.module.user;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService{
@@ -26,5 +27,19 @@ public class UserService{
 	
 	public RegisterVO login(RegisterVO registerVO){
 		return dao.login(registerVO);
+	}
+	public boolean slotBookUsingWolet(WolletBookVO bookVO){
+		int status=0;
+		try {
+			status = dao.slotBookUsingWolet(bookVO);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		if(status==1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

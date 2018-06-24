@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.cidac.onlineparking.utilty.CommonUtil;
 import com.cidac.onlineparking.utilty.DBConnection;
 import com.cidac.onlineparking.utilty.UserQuery;
 
@@ -105,6 +107,7 @@ public class UserDAO {
 			psmt.setInt(7, vo.getCityId());
 			psmt.setString(8, vo.getPass());
 			psmt.setString(9, vo.getGender());
+			psmt.setInt(10, 1);
 			// execute the query
 			status = psmt.executeUpdate();
 			ResultSet rs = psmt.getGeneratedKeys();
@@ -167,9 +170,10 @@ public class UserDAO {
 				vo.setfName(rs.getString("fname"));
 				vo.setlName(rs.getString("lname"));
 				vo.setEmail(rs.getString("email"));
-				vo.setPass(rs.getString("password"));
+				/* vo.setPass(rs.getString("password")); */
 				vo.setGender(rs.getString("gender"));
 				vo.setMobileNumber(rs.getString("mobileNumber"));
+				vo.setTotalAmount(rs.getDouble("totalamount"));
 
 			}
 		} catch (SQLException se) {
@@ -178,6 +182,218 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return vo;
+
+	}
+
+	public int slotBookUsingWolet(WolletBookVO bookVO) throws SQLException {
+		int statusForWolet = 0;
+		boolean paymentFlag = this.userWoletDeduction(bookVO);
+		System.out.println("paymentFlag comming " + paymentFlag);
+		if (paymentFlag) {
+			System.out.println("after uf");
+			boolean statusRecord = this.recordOwnerWoller(bookVO);
+			System.out.println("statusRecord comming  " + statusRecord);
+			if (statusRecord) {
+
+				boolean flag = this.slotBook(bookVO.getBookedSlots(), bookVO.getAreaId());
+				System.out.println("original slot booking comming..." + flag);
+
+				if (flag) {
+					try {
+						Connection con = DBConnection.getConnection();
+						PreparedStatement psmt = con.prepareStatement(UserQuery.USER_BOOK_HISTORY);
+
+						// set input param
+						psmt.setInt(1, bookVO.getUserId());
+						psmt.setString(2, bookVO.getBookedSlots());
+						psmt.setInt(3, bookVO.getAreaId());
+						psmt.setDouble(4, bookVO.getwBill());
+						psmt.setString(5, bookVO.getTimeTaken());
+						psmt.setString(6, new Date() + "");
+
+						// execute the query
+						statusForWolet = psmt.executeUpdate();
+
+					} catch (SQLException se) {
+						se.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		return statusForWolet;
+
+	}
+
+	/*
+	 * private void recordOwnerWoller(WolletBookVO bookVO) { // TODO Auto-generated
+	 * method stub
+	 * 
+	 * }
+	 */
+
+	private boolean recordOwnerWoller(WolletBookVO bookVO) {
+		System.out.println("recordOwnerWoller method enter...");
+		WolletStatusVO statusVO = this.creditOwnerWollet(bookVO);
+		System.out.println("recordOwnerWoller  " + statusVO);
+		boolean statusRecord = false;
+		if (statusVO.isSuccess()) {
+			try {
+				Connection con = DBConnection.getConnection();
+				PreparedStatement psmt = con.prepareStatement(UserQuery.OWNER_RECORD);
+
+				// set input param
+				psmt.setInt(1, bookVO.getUserId());
+				psmt.setString(2, new Date() + "");
+				psmt.setDouble(3, bookVO.getwBill());
+				psmt.setInt(4, statusVO.getOwnerId());
+				psmt.setInt(5, 0);
+				// execute the query
+				int ret = psmt.executeUpdate();
+				if (ret == 1) {
+					statusRecord = true;
+
+				}
+
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return statusRecord;
+
+	}
+
+	private WolletStatusVO creditOwnerWollet(WolletBookVO bookVO) {
+		System.out.println("creditOwnerWollet  enter");
+		WolletStatusVO statusVO = this.getOwnerWolletAmount(bookVO);
+		System.out.println(" credit vo " + statusVO);
+		statusVO.setSuccess(false);
+		if (statusVO.getOwnerId() != 0) {
+			try {
+				Connection con = DBConnection.getConnection();
+				PreparedStatement psmt = con.prepareStatement(UserQuery.CREDIT_OWNER_WOLLET);
+
+				// set input param
+				psmt.setDouble(1, (statusVO.getAmount() + bookVO.getwBill()));
+				psmt.setInt(2, statusVO.getOwnerId());
+
+				// execute the query
+				int ret = psmt.executeUpdate();
+				if (ret == 1) {
+					statusVO.setSuccess(true);
+
+				}
+
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return statusVO;
+
+	}
+
+	private WolletStatusVO getOwnerWolletAmount(WolletBookVO bookVO) {
+		System.out.println("getOwnerWolletAmount ");
+		WolletStatusVO vo = new WolletStatusVO();
+		try {
+			Connection con = DBConnection.getConnection();
+			PreparedStatement psmt = con.prepareStatement(UserQuery.OWNER_WOLET_AMOUNT);
+			// this.getOwnerWolletAmount(bookVO);
+			// set input param
+			psmt.setDouble(1, bookVO.getAreaId());
+
+			// execute the query
+			ResultSet rs = psmt.executeQuery();
+			while (rs.next()) {
+
+				vo.setOwnerId(rs.getInt("ownerId"));
+				vo.setAmount(rs.getDouble("amount"));
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("return vo " + vo);
+		return vo;
+
+	}
+
+	private boolean userWoletDeduction(WolletBookVO bookVO) {
+		boolean flag = true;
+		try {
+			Connection con = DBConnection.getConnection();
+			PreparedStatement psmt = con.prepareStatement(UserQuery.USER_WOLLET_DEDUCTION);
+
+			// set input param
+			psmt.setDouble(1, (bookVO.getwTotal() - bookVO.getwBill()));
+			psmt.setInt(2, bookVO.getUserId());
+
+			// execute the query
+			int ret = psmt.executeUpdate();
+			if (ret == 0) {
+				flag = false;
+
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	private boolean slotBook(String bookedSlots, Integer areaId) throws SQLException {
+		List<Integer> ids = CommonUtil.csvIds(bookedSlots);
+		System.out.println("ids   " + ids);
+		boolean flag = true;
+		Connection con = null;
+		try {
+			con = DBConnection.getConnection();
+			try {
+
+				for (Integer id : ids) {
+					PreparedStatement psmt = con.prepareStatement(UserQuery.BOOK_SLOTS);
+					con.setAutoCommit(false);
+					System.out.println("for loop..." + id);
+					// set input param
+					psmt.setInt(1, areaId);
+					psmt.setInt(2, id);
+
+					// execute the query
+					int ret = psmt.executeUpdate();
+					System.out.println("etret--->   " + ret);
+					if (ret == 0) {
+						flag = false;
+					}
+
+				}
+
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (flag == false) {
+				con.rollback();
+			}
+		}
+		return flag;
 
 	}
 }
