@@ -1,0 +1,1 @@
+SQL> create table hidden_person_tab(name varchar2(10),fname varchar2(10),ms varchar2(10),f2val1 varchar2(20),f2val2 varchar2(20));

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>SessionApp-SessionTracking3</display-name>
+  <welcome-file-list>
+    <welcome-file>personal.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>first</servlet-name>
+    <servlet-class>com.nt.servlet.FirstServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>first</servlet-name>
+    <url-pattern>/furl</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>second</servlet-name>
+    <servlet-class>com.nt.servlet.SecondServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>second</servlet-name>
+    <url-pattern>/surl</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>third</servlet-name>
+    <servlet-class>com.nt.servlet.ThirdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>third</servlet-name>
+    <url-pattern>/turl</url-pattern>
+  </servlet-mapping>
+  
+   <!-- <listener>
+     <listener-class>com.nt.listeners.RequestDurationListener</listener-class>
+   </listener>
+   
+   <listener>
+     <listener-class>com.nt.listeners.SessionDurationListener</listener-class>
+   </listener>
+    -->
+   
+  
+</web-app>

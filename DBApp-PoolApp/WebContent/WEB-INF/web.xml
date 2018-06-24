@@ -1,0 +1,15 @@
+
+<web-app>
+  <display-name>DBApp-PoolApp</display-name>
+  <welcome-file-list>
+    <welcome-file>input.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>pool</servlet-name>
+    <servlet-class>com.nt.servlet.ConnPoolServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>pool</servlet-name>
+     <url-pattern>/poolurl</url-pattern>
+  </servlet-mapping>
+</web-app>
