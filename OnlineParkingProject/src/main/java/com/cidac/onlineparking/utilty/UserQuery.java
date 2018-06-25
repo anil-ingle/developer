@@ -11,11 +11,11 @@ public class UserQuery {
 	
 	public static final String REGISTER_USER="insert into user_info (fname,lname,email,mobileNumber,createdDate,dob,cityId,password,gender,roll) values(?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String LOGIN_USSER="select r.id,r.fname,r.lname,r.email,r.mobileNumber,r.password,r.gender,w.totalamount from user_info as r inner join userwolet w where email=? and password=? and r.id=w.userId";
+	public static final String LOGIN_USSER="select r.id,r.roll,r.fname,r.lname,r.email,r.mobileNumber,r.password,r.gender,w.totalamount from user_info as r inner join userwolet w where email=? and password=? and r.id=w.userId";
 	
 	public static final String CREATE_USER_WOLET="insert into userwolet (totalAmount,userId) values(?,?)";
 	
-	public static final String BOOK_SLOTS="UPDATE tab_slot_datail SET is_reserved = 1  where fslot_id=(select slot_id from tab_slot where area_id=?) and id=?";
+	public static final String BOOK_SLOTS="UPDATE tab_slot_datail SET is_reserved = 1  where fslot_id=(select slot_id from tab_slot where area_id=?) and slot_number=?";
 	
 	public static final String USER_WOLLET_DEDUCTION="update userwolet set totalamount=? where userId=?";
 	

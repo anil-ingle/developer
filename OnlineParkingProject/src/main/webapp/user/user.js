@@ -236,12 +236,13 @@
 		                if (response) {
 		                	jq('#getCodeModal').modal('hide');
 		                	toastr.success("Booking successfully.");
-		                  
+		                  this.reset();
 		                }
 		            },
 		            error: function (xhr, status, err) {
 		            	jq('#getCodeModal').modal('hide');
 		            	toastr.error("Booking not successfully. Please contact support team.");
+		            	this.reset();
 		            	 
 		            }
 		        });

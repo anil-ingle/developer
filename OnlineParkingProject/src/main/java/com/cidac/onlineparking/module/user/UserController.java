@@ -14,7 +14,9 @@ import com.cidac.onlineparking.utilty.JsonUtil;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
-	/**
+	/*
+	 * Author:Ani D.Ingle
+	 * Date:12/03/218
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -52,10 +54,8 @@ public class UserController extends HttpServlet {
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			String line;
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				buffer.append(line);
-			}
-
 			String requestData = buffer.toString();
 			this.bookSlot(buffer.toString(), req, resp);
 		}
@@ -63,10 +63,8 @@ public class UserController extends HttpServlet {
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			String line;
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				buffer.append(line);
-			}
-
 			this.registeUser(JsonUtil.convertJsonToJava(buffer.toString(), RegisterVO.class), resp);
 
 		}
@@ -74,24 +72,19 @@ public class UserController extends HttpServlet {
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			String line;
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				buffer.append(line);
-			}
-			System.out.println("wollet info  " + buffer.toString());
 			WolletBookVO bookVO = JsonUtil.convertJsonToJava(buffer.toString(), WolletBookVO.class);
 			System.out.println("bookvo  " + bookVO);
 			this.slotBookUsingWolet(bookVO, req, resp);
 
 		}
 		if ((link != null) && link.equals("login")) {
-			boolean flag = true;
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			String line;
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				buffer.append(line);
-			}
-
 			this.login(JsonUtil.convertJsonToJava(buffer.toString(), RegisterVO.class), resp, req);
 
 		}
@@ -101,7 +94,7 @@ public class UserController extends HttpServlet {
 	// ------user defined private method to services-------------------------------
 	private void login(RegisterVO registerVO, HttpServletResponse resp, HttpServletRequest req) {
 		RegisterVO vo = service.login(registerVO);
-		System.out.println("reg vo " + vo);
+
 		HttpSession session = req.getSession(true);
 		if (vo.getId() != 0) {
 			resp.setContentType("Application/Json");
@@ -115,8 +108,8 @@ public class UserController extends HttpServlet {
 		} else {
 			resp.setContentType("Application/Json");
 			try {
-				String status = "false";
-				resp.getWriter().write(status);
+
+				resp.getWriter().write("false");
 			} catch (IOException e) {
 
 				e.printStackTrace();
@@ -129,8 +122,8 @@ public class UserController extends HttpServlet {
 
 		resp.setContentType("Application/Json");
 		try {
-			boolean val = service.registerUser(vo);
-			resp.getWriter().write(val + "");
+
+			resp.getWriter().write(service.registerUser(vo) + "");
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -142,10 +135,10 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session != null) {
-			String val = "true";
+
 			resp.setContentType("Application/Json");
 			try {
-				resp.getWriter().write(val);
+				resp.getWriter().write("true");
 			} catch (IOException e) {
 
 				e.printStackTrace();
@@ -160,10 +153,10 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session != null) {
-			String getAreaSlot = JsonUtil.convertJavaToJson(service.getAreaSlot(Integer.parseInt(parameter)));
+
 			resp.setContentType("Application/Json");
 			try {
-				resp.getWriter().write(getAreaSlot);
+				resp.getWriter().write(JsonUtil.convertJavaToJson(service.getAreaSlot(Integer.parseInt(parameter))));
 			} catch (IOException e) {
 
 				e.printStackTrace();
@@ -175,15 +168,13 @@ public class UserController extends HttpServlet {
 	}
 
 	private void getArea(String parameter, HttpServletResponse resp) throws NumberFormatException, IOException {
-		String areaName = JsonUtil.convertJavaToJson(service.getArea(Integer.parseInt(parameter)));
 		resp.setContentType("Application/Json");
-		resp.getWriter().write(areaName);
+		resp.getWriter().write(JsonUtil.convertJavaToJson(service.getArea(Integer.parseInt(parameter))));
 	}
 
 	private void getCity(HttpServletResponse resp) throws IOException {
-		String city = JsonUtil.convertJavaToJson(service.selectCity());
 		resp.setContentType("Application/Json");
-		resp.getWriter().write(city);
+		resp.getWriter().write(JsonUtil.convertJavaToJson(service.selectCity()));
 
 	}
 
@@ -212,7 +203,7 @@ public class UserController extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if (session != null) {
 			boolean status = service.slotBookUsingWolet(bookVO);
-			System.out.println("status "+status);
+			System.out.println("status " + status);
 			resp.setContentType("Application/Json");
 			try {
 				resp.getWriter().write(status + "");

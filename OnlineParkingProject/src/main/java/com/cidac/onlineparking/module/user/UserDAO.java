@@ -119,7 +119,7 @@ public class UserDAO {
 				wolletStatus = this.createUserWolet(count);
 			}
 			if (wolletStatus == 0) {
-				con.rollback();
+				// con.rollback();
 				count = 0;
 			}
 		} catch (SQLException se) {
@@ -170,7 +170,7 @@ public class UserDAO {
 				vo.setfName(rs.getString("fname"));
 				vo.setlName(rs.getString("lname"));
 				vo.setEmail(rs.getString("email"));
-				/* vo.setPass(rs.getString("password")); */
+				vo.setRoll(rs.getInt("roll"));
 				vo.setGender(rs.getString("gender"));
 				vo.setMobileNumber(rs.getString("mobileNumber"));
 				vo.setTotalAmount(rs.getDouble("totalamount"));
@@ -363,35 +363,33 @@ public class UserDAO {
 
 				for (Integer id : ids) {
 					PreparedStatement psmt = con.prepareStatement(UserQuery.BOOK_SLOTS);
-					con.setAutoCommit(false);
+					// con.setAutoCommit(false);
 					System.out.println("for loop..." + id);
 					// set input param
 					psmt.setInt(1, areaId);
 					psmt.setInt(2, id);
+					System.out.println("areaId  " + areaId + "   id  " + id);
 
 					// execute the query
 					int ret = psmt.executeUpdate();
-					System.out.println("etret--->   " + ret);
-					if (ret == 0) {
-						flag = false;
-					}
+					System.out.println("ret--->   " + ret);
 
 				}
 
 			} catch (SQLException se) {
+				flag = false;
 				se.printStackTrace();
 			} catch (Exception e) {
+				flag = false;
 				e.printStackTrace();
 			}
 
 		} catch (SQLException se) {
+			flag = false;
 			se.printStackTrace();
 		} catch (Exception e) {
+			flag = false;
 			e.printStackTrace();
-		} finally {
-			if (flag == false) {
-				con.rollback();
-			}
 		}
 		return flag;
 

@@ -74,7 +74,7 @@ var jq=$;
 			                	console.log(response)
 			                	
 			                	 sessionStorage.setItem('user', JSON.stringify(response));
-
+			                	if(response.roll==1)
 			                	window.location.href = "http://localhost:2020/OnlineParkingProject/user/user-main.html";
 			                	toastr.success("login successfully.");
 			                	resetReg();
