@@ -25,10 +25,10 @@
     <!--
     <Manager pathname="" />
     -->
-    <Resource name="DsJndi" auth="Container" type="javax.sql.DataSource"
+     <Resource name="DsJndi" auth="Container" type="javax.sql.DataSource"
 
 		username="root" password="anil" driverClassName="com.mysql.jdbc.Driver"
 
 		url="jdbc:mysql://localhost:3306/onlineparking" maxTotal="60"
-		maxIdle="20"  />
+maxIdle="20" />
 </Context>

@@ -3,9 +3,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main_user.css">
- <script src="node_modules/ag-grid/dist/ag-grid.min.noStyle.js"></script>
-  <link rel="stylesheet" href="node_modules/ag-grid/dist/styles/ag-grid.css">
-  <link rel="stylesheet" href="node_modules/ag-grid/dist/styles/ag-theme-balham.css">
+ <script src="../node_modules/ag-grid/dist/ag-grid.min.noStyle.js"></script>
+  <link rel="stylesheet" href="../node_modules/ag-grid/dist/styles/ag-grid.css">
+  <link rel="stylesheet" href="../node_modules/ag-grid/dist/styles/ag-theme-balham.css">
+ 
 <style>
 .ag-grid-order{
 paddint-top:20px;
@@ -16,8 +17,10 @@ paddint-top:20px;
 <title>Online Parking order</title></head>
 <script
 	src="jquery.min.js"></script>
+	<script type="text/javascript" src="header.js"></script>
 	<script type="text/javascript">
-	var jq=$;
+	
+	/* var jq=$;
 	jq(document).ready(function() {
 		let name="Anil";
 		logo(name);
@@ -26,21 +29,21 @@ paddint-top:20px;
 
 	});
 	function logo(name){
-		let ur="<div class='user-r-page'><a class='hy-user' href='user_main.jsp'>Home</a></div>"
+		let ur="<div class='user-r-page'><a class='hy-user' href='user-main.html'>Home</a></div>"
 		let uh="<div class='user-r-history'><a class='hy-history' href='order.html'>Order</a></div>"
 		let p="<div class='wolet-page'><a class='hy-wpage' href='../input.html'>My Wolet</a></div>"
 		let info="<div id='header-nav-right' class='header-nav-right'><div class='header-user-name'>Welcome "+name+"</div><div class='header-log-out-logo'><button class='logout-btn'>logout</button></div></div>";
 		if(ur||uh||p||info)
 		 document.getElementById("pc").innerHTML =ur+p+uh+info;
 	}
-
+ */
 	
 	</script>
 
 
 <body>
-<div >
- <div id="pc" class="header"> </div>
+<div class="main-container">
+ <div id="hdr" class="header"></div>
  <div class="ag-grid-order">
   <div  id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham"></div>
  </div>
@@ -73,6 +76,20 @@ paddint-top:20px;
  // create the grid passing in the div to use together with the columns & data we want to use
  new agGrid.Grid(eGridDiv, gridOptions);
 data=[{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
+	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
 	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000},
 	{"parkingStand":"hydrabad","city":"Hydrabad","date":"26-05-2018","intime":"18:00","outtime":"23:00","price":35000}];
 gridOptions.api.setRowData(data);

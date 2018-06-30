@@ -1,0 +1,10 @@
+SQL> desc info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(15)
+ ADDRS                                              VARCHAR2(15)
+ AGE                                                NUMBER(10)
+ SKILS                                              VARCHAR2(20)
+ EXP                                                NUMBER(9,2)
+ CITY                                               VARCHAR2(15)
+ SALARY                                             NUMBER(10)
